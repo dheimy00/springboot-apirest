@@ -12,8 +12,10 @@ import br.com.builders.services.ClienteService;
 @Service
 public class ClienteServiceImpl implements ClienteService{
 	
+	
 	@Autowired
 	private ClienteRepositories clienteRepositories;
+	
 
 	@Override
 	public Cliente salvar(Cliente cliente) {
@@ -25,7 +27,7 @@ public class ClienteServiceImpl implements ClienteService{
 	@Override
 	public List<Cliente> lista() {
 
-		return (List<Cliente>)clienteRepositories.findAll();
+		return clienteRepositories.findAll();
 	}
 
 	@Override

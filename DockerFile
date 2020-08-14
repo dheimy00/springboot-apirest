@@ -1,4 +1,0 @@
- 
-FROM openjdk:8
-ADD target/springboot-apirest.jar .
-ENTRYPOINT ["java", "-jar", "springboot-apirest.jar"]

@@ -60,8 +60,8 @@ public class ClienteRestControler {
 	public ResponseEntity<Cliente> atualiza(@PathVariable("id") final Long id, final Cliente cliente) {
 
 		logger.info("Buscando cliente com id {}", id);
-		List<Cliente> lista = clienteService.lista();
-		if ( (id >= lista.size()) ||(id < 0 )) {
+		Cliente get = clienteService.getCliente(id);
+		if ( get == null || get.getId() < 0) {
 			logger.error("Não foi possível atualizar. Cliente com o ID {} ​​não encontrado.", id);
 			throw new  ClienteNotFoundException("Não foi possível atualizar. Cliente com id " + id + " não encontrado");
 		}
@@ -74,12 +74,11 @@ public class ClienteRestControler {
 	public ResponseEntity<Cliente> getCliente(@PathVariable("id") final Long id) {
 
 		logger.info("Buscando cliente com id {}", id);
-		List<Cliente> lista = clienteService.lista();
-		if ( (id >= lista.size()) ||(id < 0 )) {
+		Cliente get = clienteService.getCliente(id);
+		if ( get == null || get.getId() < 0 ) {
 			logger.error("Cliente com o ID {} ​​não encontrado.", id);
 			throw new  ClienteNotFoundException("Cliente com id " + id + " não encontrado");
 		}
-		Cliente get = clienteService.getCliente(id);
 		return new ResponseEntity<>(get, HttpStatus.OK);
 	}
 
@@ -88,8 +87,8 @@ public class ClienteRestControler {
 	public ResponseEntity<String> excluir(@PathVariable("id") final Long id) {
 
 		logger.info("Buscando cliente com id {}", id);
-		List<Cliente> lista = clienteService.lista();
-		if ( (id >= lista.size()) ||(id < 0 )) {
+		Cliente get = clienteService.getCliente(id);
+		if ( get == null || get.getId() < 0 ) {
 			logger.error("Não foi possível excluir. Cliente com o ID {} ​​não encontrado.", id);
 			throw new  ClienteNotFoundException("Não foi possível excluir. Cliente com id " + id + " não encontrado");
 		}
